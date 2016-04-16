@@ -175,6 +175,7 @@ public class PostgreSQLClient {
     }
 	
 	public CandidateBean getVoter(String email, String password) {
+		/*
 		String selectquery = "SELECT * FROM candidate WHERE EmailAddress = '" + email + "' and Password = '" + password + "';";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -208,6 +209,9 @@ public class PostgreSQLClient {
                 connection.close();
             }
         }
+		*/
+		CandidateBean bean = new CandidateBean();
+		return bean;
 	}
 	
 	public boolean doesCandidateExist(String email, String password)throws Exception {
