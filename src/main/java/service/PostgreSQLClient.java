@@ -175,8 +175,39 @@ public class PostgreSQLClient {
     }
 	
 	public CandidateBean getVoter(String email, String password) {
-		CandidateBean bean = new CandidateBean();
-		return bean;
+		String selectquery = "SELECT * FROM candidate WHERE EmailAddress = '" + email + "' and Password = '" + password + "';";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+		try {
+            connection = getConnection();
+            statement = connection.prepareStatement(selectquery);
+            rs = statement.executeQuery();
+
+            CandidateBean candidate = new CandidateBean();
+            if ( rs.next() ) {
+				candidate.setCandidateID(rs.getInt("CandidateID"));
+                candidate.setFirstName(rs.getString("FirstName"));
+				candidate.setMiddleName(rs.getString("MiddleName"));
+				candidate.setLastName(rs.getString("LastName"));
+				candidate.setNickname(rs.getString("Nickname"));
+				candidate.setBirthday(rs.getDate("Birthday"));
+				candidate.setBirthplace(rs.getString("Birthplace"));
+				candidate.setGender(rs.getString("Gender"));
+				candidate.setElectionListID(rs.getInt("ElectionListID"));
+            }
+            return candidate;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
 	}
 	
 	public boolean doesCandidateExist(String email, String password)throws Exception {

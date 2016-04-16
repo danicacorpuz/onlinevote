@@ -263,11 +263,9 @@
             <input type="submit" name="analyze" value="Analyze" />
         </form>
 		
-	<% 
 		if(request.getAttribute("dilemma")!=null) {
 			out.println("<h1>" + (String) request.getAttribute("dilemma") + "</h1>");
 		}
-	%>
 		
 		%>
     </body>
