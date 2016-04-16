@@ -38,9 +38,10 @@ public class LoginCandidateServlet extends HttpServlet {
 			//PostgreSQLClient client = new PostgreSQLClient();
 			//if(client.doesCandidateExist(email, password)) {
 				
-				response.setContentType("text/html");
-				response.setStatus(200);
-				request.getRequestDispatcher("candidatehome.jsp").forward(request, response);
+			response.sendRedirect("candidatehome.jsp");
+			//	response.setContentType("text/html");
+			//	response.setStatus(200);
+			//	request.getRequestDispatcher("candidatehome.jsp").forward(request, response);
 			//}
 			//else {
 			//	response.sendRedirect("candidatelogin.jsp");
