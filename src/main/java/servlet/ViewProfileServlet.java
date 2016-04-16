@@ -32,7 +32,9 @@ public class ViewProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-			int candidateid = (int) request.getParameter("profileid");
+			String temp = (String) request.getParameter("profileid");
+			
+			int candidateid = Integer.parseInt(temp);
 			
 			PostgreSQLClient client = new PostgreSQLClient();
 			CandidateBean candidatebean = new CandidateBean();

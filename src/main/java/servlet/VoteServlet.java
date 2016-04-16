@@ -32,7 +32,11 @@ public class VoteServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+			try {
 			HttpSession session = request.getSession();
+			
+			CandidateBean candidateaccount = (CandidateBean) session.getAttribute("candidateaccount");
+			
 			//get selected candidate
             String pres = (String) request.getParameter("selectpres");
 			String vicepres = (String) request.getParameter("selectvicepres");
@@ -64,12 +68,15 @@ public class VoteServlet extends HttpServlet {
 			}
 			
 			//Retrieve Selected Candidates
-			List<CandidateBean> ballot = client.getBallotPerUser(email, password);
+			List<CandidateBean> ballot = client.getBallotPerUser(candidateaccount.getEmailAddress(), candidateaccount.getPassword());
 			session.setAttribute("ballot", ballot);
 			
 			response.setContentType("text/html");
 			response.setStatus(200);
 			request.getRequestDispatcher("home.jsp").forward(request, response);
+			} catch(Exception e) {
+			
+			}
         }
     }
 

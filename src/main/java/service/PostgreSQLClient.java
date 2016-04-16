@@ -174,6 +174,11 @@ public class PostgreSQLClient {
         return false;
     }
 	
+	public CandidateBean getVoter(String email, String password) {
+		CandidateBean bean = new CandidateBean();
+		return bean;
+	}
+	
 	public boolean doesCandidateExist(String email, String password)throws Exception {
         String selectquery = "SELECT * FROM candidate WHERE EmailAddress = '" + email + "' and Password = '" + password + "';";
         Connection connection = null;
@@ -229,19 +234,26 @@ public class PostgreSQLClient {
         }
 		
 	}
-	/*
+	
 	public List<EducationalBGBean> getEducBGPerCandidate(int candidateID) {
-		return ;
+		List<EducationalBGBean> list = new ArrayList<EducationalBGBean>();
+		return list;
 	}
 	
 	public boolean voteForCandidate(int CandidateID) {
-		return ;
+		return true;
 	}
 	
 	public List<CandidateBean> getVotedCandidatesPerUser(String email, String password) {
-		return ;
+		List<CandidateBean> list = new ArrayList<CandidateBean>();
+		return list;
 	}
-*/
+	
+	public CandidateBean getCandidateProfile(int candidateID) {
+		CandidateBean bean = new CandidateBean();
+		return bean;
+	}
+
     public static Connection getConnection() throws Exception {
         Map<String, String> env = System.getenv();
         if (env.containsKey("VCAP_SERVICES")) {

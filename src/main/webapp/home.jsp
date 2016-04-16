@@ -3,6 +3,7 @@
 <%@page import="bean.CandidateBean"%>
 
 <% List<CandidateBean> ballot = (List<CandidateBean>) session.getAttribute("ballot"); %>
+<% CandidateBean candidateaccount = (CandidateBean>) session.getAttribute("candidateaccount"); %>
 
 <!DOCTYPE html>
 <html>

@@ -34,11 +34,15 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 			
 			HttpSession session = request.getSession();
+			PostgreSQLClient client = new PostgreSQLClient();
 			
             String email = (String) request.getParameter("email");
 			String password = (String) request.getParameter("password");
             
-			PostgreSQLClient client = new PostgreSQLClient();
+			CandidateBean bean = new CandidateBean();
+			bean = client.getVoter(email, password);
+			session.setAttribute("candidateaccount", bean);
+			
 			if(client.doesVoterExist(email, password)) {
 				List<CandidateBean> presidentlist = client.getCandidatesPerPosition(1);
 				List<CandidateBean> vicepresidentlist = client.getCandidatesPerPosition(2);
@@ -58,7 +62,8 @@ public class LoginServlet extends HttpServlet {
 			else {
 				response.sendRedirect("login.jsp");
 			}
-        }
+        } catch(Exception e) {
+		}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
